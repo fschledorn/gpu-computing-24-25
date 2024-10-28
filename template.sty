@@ -1,0 +1,188 @@
+\usepackage{graphicx} % Required for inserting images
+
+
+% Provides logos for various TeX engines (e.g., LaTeX, XeLaTeX)
+\usepackage{metalogo} 
+
+ % Provides additional symbols and text characters
+\usepackage{textcomp}
+
+% Provides generic symbols (e.g., degree symbol, ohm symbol)
+\usepackage{gensymb} 
+
+% Allows customization of page layout and margins
+\usepackage
+[
+        a4paper,% other options: a3paper, a5paper, etc
+        left=3cm,
+        right=3cm,
+        top=4cm,
+        bottom=6cm,
+        % use vmargin=2cm to make vertical margins equal to 2cm.
+        % us  hmargin=3cm to make horizontal margins equal to 3cm.
+        % use margin=3cm to make all margins  equal to 3cm.
+]
+{geometry}
+
+% Provides various mathematical and physical symbols and notations
+\usepackage{physics} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Some of my favorite personal adjustments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% These are the adjustments that I consider necessary for typesetting
+% a nice thesis. However, they are *not* included in the template, as
+% I do not want to force you to use them.
+
+% This ensures that I am able to typeset bold font in table while still aligning the numbers
+% correctly.
+\usepackage{etoolbox}
+
+\usepackage[binary-units=true]{siunitx}
+\DeclareSIUnit\px{px}
+
+\sisetup{%
+  detect-all           = true,
+  detect-family        = true,
+  detect-mode          = true,
+  detect-shape         = true,
+  detect-weight        = true,
+  detect-inline-weight = math,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Hyperlinks & bookmarks
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[%
+  colorlinks  = true,
+  citecolor   = MidnightBlue,
+  linkcolor   = MidnightBlue,
+  urlcolor    = MidnightBlue,
+  pdftitle    ={Visualization of Magnetic Reconnection in Three Dimensional Plasma}
+  pdfauthor   ={Maximilian Maria Richter},
+  pdfsubject  ={Scientific Visualization},
+  pdfkeywords ={magnetic reconnection, plasma, visualization, bifurcation lines, vortex core lines, shear layers}
+  pdfcreator  ={pdflatex, or other tool}
+]{hyperref}
+
+\usepackage{bookmark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% I like the bibliography to be extremely plain, showing only a numeric
+% identifier and citing everything in simple brackets. The first names,
+% if present, will be initialized. DOIs and URLs will be preserved.
+
+\usepackage[%
+  autocite      = plain,
+  backend       = biber,
+  doi           = false,
+  url           = true,
+  giveninits    = true,
+  hyperref      = true,
+  maxbibnames   = 99,
+  maxcitenames  = 2,
+  sortcites     = true,
+  style         = alphabetic,
+  citestyle     = alphabetic,
+  maxalphanames = 2, % max number of authors before it becomes [First+12]
+  backref       = true,
+  ]{biblatex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fonts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage[osf,lining]{ebgaramond}  
+\usepackage[scale=0.7]{sourcecodepro}  
+
+
+% Provides the Palatino font for math equations and text.
+\usepackage{mathpazo}
+
+% Allows for the typesetting of dropped capitals at the beginning of a paragraph.
+\usepackage{lettrine}
+
+% Enables the creation of an index for the document.
+\usepackage{makeidx}
+\makeindex
+
+% Use placeholder text
+\usepackage{lipsum}
+\usepackage[math]{blindtext}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Incipit
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{mathtools} % Enhances the typesetting of mathematical equations.
+\usepackage{amssymb} % Provides additional mathematical symbols.
+\usepackage{siunitx} % Formats numbers and units according to SI units conventions.
+
+% Corrects \autoref{}: chapter -> Chapter, section -> Section, subsection -> Section
+% \addto\extrasenglish{%
+%   \renewcommand{\chapterautorefname}{Chapter}%
+%   \renewcommand{\sectionautorefname}{Section}%
+%   \renewcommand{\subsectionautorefname}{Section}%
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OWN STUFF
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Bold math symbols
+\usepackage{bm}
+
+% Including SVG images
+\usepackage{svg}
+
+% Customizing float environments
+\usepackage{float}
+
+% Customizing captions of figures and tables
+\usepackage[font=small, labelfont=bf, width=0.8\textwidth]{caption}
+
+% Customizing labels in enumerations
+\usepackage[shortlabels]{enumitem}
+
+% Font encoding
+\usepackage[LGR,T1]{fontenc}
+
+% Text alpha symbols
+\usepackage{textalpha}
+
+% Typesetting algorithms
+\usepackage{algorithm}
+
+% Typesetting pseudocode
+\usepackage{algpseudocode}
+
+% % Typesetting code
+\usepackage{xcolor}
+
+% % Typesetting code
+\usepackage{listings}
+
+% % xparse for defining new commands with multiple arguments
+\usepackage{xparse}
+
+\NewDocumentCommand{\codeword}{v}{%
+\texttt{\textcolor{black}{#1}}%
+}
+
+\newcommand\todo[1]{\textcolor{red}{#1}}
+
+% Typesetting theorem-like environments
+\usepackage{amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{example}{Example}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\renewcommand{\floatpagefraction}{.8}% No more than 80% of a page will be taken up by floating figures
+
