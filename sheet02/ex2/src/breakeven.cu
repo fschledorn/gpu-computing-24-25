@@ -13,7 +13,7 @@ __global__ void busyWait(int cycles, bool b) {
 }
 
 double timeBusyWait(int cycles) {
-    const int cIter = 1000;
+    const int cIter = 10000;
 
     double elapsed = 0;
     for (int i = 0; i < cIter; i++) {
@@ -23,7 +23,6 @@ double timeBusyWait(int cycles) {
         // however, the async startup time didn't seem to go up even when looping
         // for millions of cycles, and i don't know why:(
         busyWait<<<1, 1>>>(cycles, false);
-        cudaDeviceSynchronize();
         chTimerGetTime(&stop);
         elapsed += chTimerElapsedTime(&start, &stop);
     }
@@ -40,7 +39,7 @@ int main() {
     // limit to 10 million cycles as a precaution
     for (int c = 0; c < 10'000'000; c += 100) {
         double t = timeBusyWait(c);
-        if (t >= 2 * initial) {
+        if (t >= 1.99 * initial) {
             printf("%d cycles: %0.2e\n", c, t); fflush(stdout);
             break;
         }
