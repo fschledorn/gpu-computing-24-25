@@ -5,7 +5,7 @@ NVCC=nvcc
 NVCC_FLAGS=-O2 --compiler-options "-O2 -Wall -Wextra"
 
 .PHONY: build
-build: ./bin/nullKernelAsync
+build: ./bin/breakeven
 
 .PHONY: clean
 clean:
@@ -14,5 +14,5 @@ clean:
 .PHONY: rebuild
 rebuild: clean build
 
-./bin/nullKernelAsync: ./src/nullKernelAsync.cu
+./bin/breakeven: ./src/breakeven.cu
 	$(NVCC) $(NVCC_FLAGS) -o $@ $^ $(INC) $(LIB)
