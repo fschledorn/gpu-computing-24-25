@@ -23,7 +23,7 @@ __global__ void globalToShmemKernel(volatile float arr[], int elems) {
 
     for (int add = 0; add < REPETITIONS; ++add) {
         for (int offset = 0; offset < elems; offset += stride) {
-            int idx = offset + blockIdx.x * blockDim.x + threadIdx.x;
+            int idx = offset + threadIdx.x;
             if (idx < elems) {
                 shmem[idx] = arr[globalBase + idx] + ((float) add);
             }
@@ -45,7 +45,7 @@ __global__ void shmemToGlobalKernel(volatile float arr[], int elems) {
     int stride = blockDim.x;
     for (int add = 0; add < REPETITIONS; ++add) {
         for (int offset = 0; offset < elems; offset += stride) {
-            int idx = offset + blockIdx.x * blockDim.x + threadIdx.x;
+            int idx = offset + threadIdx.x;
             if (idx < elems) {
                 arr[globalBase + idx] = shmem[idx] + ((float) add);
             }
@@ -64,12 +64,11 @@ __global__ void shmemToRegKernel(int elems) {
     // use volatile to prevent the compiler from optimizing away the reads
     extern __shared__ volatile float shmem[];
 
-    int globalBase = blockDim.x * blockIdx.x;
     int stride = blockDim.x;
     volatile float myVar = 1.0f;
     for (int add = 0; add < REPETITIONS; ++add) {
         for (int offset = 0; offset < elems; offset += stride) {
-            int idx = offset + blockIdx.x * blockDim.x + threadIdx.x;
+            int idx = offset + threadIdx.x;
             if (idx < elems) {
                 myVar = shmem[idx] + ((float) add);
             }
@@ -87,12 +86,11 @@ __global__ void regToShmemKernel(int elems) {
     // use volatile to prevent the compiler from optimizing away the reads
     extern __shared__ volatile float shmem[];
 
-    int globalBase = blockDim.x * blockIdx.x;
     int stride = blockDim.x;
     volatile float myVar = 1.0f;
     for (int add = 0; add < REPETITIONS; ++add) {
         for (int offset = 0; offset < elems; offset += stride) {
-            int idx = offset + blockIdx.x * blockDim.x + threadIdx.x;
+            int idx = offset + threadIdx.x;
             if (idx < elems) {
                 shmem[idx] = myVar + ((float) add);
             }
@@ -275,18 +273,18 @@ int main() {
     std::cout << "shared mem: " << props.sharedMemPerMultiprocessor << std::endl;
     */
 
-    std::cout << "Timing global to shared" << std::endl;
-    timeGlobalToShmem();
-    std::cout << "Timing shared to global" << std::endl;
-    timeShmemToGlobal();
+    // std::cout << "Timing global to shared" << std::endl;
+    // timeGlobalToShmem();
+    // std::cout << "Timing shared to global" << std::endl;
+    // timeShmemToGlobal();
     std::cout << "Timing each with large grid sizes: global to shared" << std::endl;
     timeGlobalToShmemWithGrid();
     std::cout << "Timing each with large grid sizes: shared to global" << std::endl;
     timeShmemToGlobalWithGrid();
 
-    std::cout << "Timing read from shared memory (to registers)" << std::endl;
-    timeShmemToReg();
-
-    std::cout << "Timing write to shared memory (to registers)" << std::endl;
-    timeRegToShmem();
+    // std::cout << "Timing read from shared memory (to registers)" << std::endl;
+    // timeShmemToReg();
+    //
+    // std::cout << "Timing write to shared memory (to registers)" << std::endl;
+    // timeRegToShmem();
 }
